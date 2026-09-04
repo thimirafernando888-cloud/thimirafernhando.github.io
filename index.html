@@ -5,14 +5,315 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Thimira | Personal Portfolio & Hub</title>
   
-  <link rel="stylesheet" href="style.css">
+  <style>
+    /* --- Google Fonts & Variables --- */
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+
+    :root {
+      --bg-color: #0b0f19;
+      --card-bg: rgba(22, 27, 46, 0.65);
+      --card-border: rgba(255, 255, 255, 0.08);
+      --text-main: #f3f4f6;
+      --text-muted: #9ca3af;
+      
+      /* Cyber Accent Colors */
+      --accent-purple: #8b5cf6;
+      --accent-pink: #ec4899;
+      --accent-cyan: #06b6d4;
+      --accent-green: #10b981;
+      
+      --radius: 16px;
+      --transition: all 0.3s ease;
+    }
+
+    /* --- Base Reset --- */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', sans-serif;
+    }
+
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      line-height: 1.6;
+      overflow-x: hidden;
+      position: relative;
+      min-height: 100vh;
+    }
+
+    /* --- Ambient Background Glows --- */
+    .glow-orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(120px);
+      opacity: 0.3;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    .orb-1 {
+      top: -100px;
+      left: -100px;
+      width: 450px;
+      height: 450px;
+      background: var(--accent-purple);
+    }
+
+    .orb-2 {
+      top: 350px;
+      right: -100px;
+      width: 450px;
+      height: 450px;
+      background: var(--accent-pink);
+    }
+
+    .orb-3 {
+      bottom: 50px;
+      left: 20%;
+      width: 500px;
+      height: 500px;
+      background: var(--accent-cyan);
+    }
+
+    /* --- Navigation --- */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.25rem 10%;
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--card-border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(11, 15, 25, 0.85);
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 2rem;
+    }
+
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-weight: 500;
+      transition: var(--transition);
+    }
+
+    .nav-links a:hover {
+      color: var(--accent-cyan);
+    }
+
+    /* --- Layout --- */
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 2rem 4rem 2rem;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .section-title {
+      font-size: 1.75rem;
+      margin: 3.5rem 0 1.5rem 0;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+    }
+
+    /* --- Hero Section --- */
+    .hero {
+      text-align: center;
+      padding: 5rem 1rem 3rem 1rem;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 0.4rem 1rem;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--card-border);
+      border-radius: 50px;
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      margin-bottom: 1.5rem;
+    }
+
+    .hero h1 {
+      font-size: 3.5rem;
+      margin-bottom: 1rem;
+      letter-spacing: -1px;
+    }
+
+    .gradient-text {
+      background: linear-gradient(135deg, var(--accent-purple), var(--accent-pink));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero p {
+      color: var(--text-muted);
+      font-size: 1.2rem;
+      max-width: 600px;
+      margin: 0 auto 2rem auto;
+    }
+
+    .hero-tags {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+    }
+
+    .tag {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--card-border);
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      transition: var(--transition);
+    }
+
+    .tag:hover {
+      border-color: var(--accent-purple);
+      background: rgba(139, 92, 246, 0.1);
+    }
+
+    /* --- Status Banner --- */
+    .status-banner {
+      background: linear-gradient(135deg, rgba(139, 92, 246, 0.15), rgba(6, 182, 212, 0.15));
+      border: 1px solid rgba(139, 92, 246, 0.3);
+      padding: 1.5rem;
+      border-radius: var(--radius);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      backdrop-filter: blur(12px);
+      margin-bottom: 2rem;
+    }
+
+    .status-title {
+      font-size: 1.1rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .status-desc {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    .badge-active {
+      background: rgba(16, 185, 129, 0.15);
+      color: #34d399;
+      border: 1px solid rgba(16, 185, 129, 0.3);
+    }
+
+    /* --- Cards & Glassmorphism --- */
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius);
+      padding: 1.75rem;
+      backdrop-filter: blur(12px);
+      transition: var(--transition);
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(255, 255, 255, 0.2);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+    }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .card-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.25rem;
+    }
+
+    .icon-purple { background: rgba(139, 92, 246, 0.2); border: 1px solid rgba(139, 92, 246, 0.3); }
+    .icon-pink   { background: rgba(236, 72, 153, 0.2); border: 1px solid rgba(236, 72, 153, 0.3); }
+    .icon-cyan   { background: rgba(6, 182, 212, 0.2); border: 1px solid rgba(6, 182, 212, 0.3); }
+    .icon-green  { background: rgba(16, 185, 129, 0.2); border: 1px solid rgba(16, 185, 129, 0.3); }
+
+    .card h3 {
+      font-size: 1.2rem;
+    }
+
+    .card ul {
+      list-style: none;
+    }
+
+    .card li {
+      color: var(--text-muted);
+      margin-bottom: 0.8rem;
+      font-size: 0.95rem;
+    }
+
+    .card li strong {
+      color: var(--text-main);
+    }
+
+    .card li:last-child {
+      margin-bottom: 0;
+    }
+
+    /* --- Footer --- */
+    footer {
+      text-align: center;
+      padding: 2.5rem;
+      border-top: 1px solid var(--card-border);
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    /* --- Responsive Adjustments --- */
+    @media (max-width: 768px) {
+      .hero h1 { font-size: 2.5rem; }
+      .grid-2 { grid-template-columns: 1fr; }
+      .status-banner { flex-direction: column; align-items: flex-start; gap: 1rem; }
+    }
+  </style>
 </head>
 <body>
 
+  <!-- Ambient Glow Background -->
   <div class="glow-orb orb-1"></div>
   <div class="glow-orb orb-2"></div>
   <div class="glow-orb orb-3"></div>
 
+  <!-- Navigation -->
   <nav>
     <div class="logo">THIMIRA</div>
     <ul class="nav-links">
@@ -22,6 +323,7 @@
     </ul>
   </nav>
 
+  <!-- Hero Section -->
   <header class="hero">
     <div class="badge">📍 Galle, Sri Lanka (Originally from Ampara)</div>
     <h1>Hello, I'm <span class="gradient-text">Thimira</span></h1>
@@ -37,6 +339,7 @@
 
   <main class="container">
 
+    <!-- Active Status Banner -->
     <div class="status-banner">
       <div>
         <h4 class="status-title">Current Focus</h4>
@@ -45,6 +348,7 @@
       <span class="badge badge-active">● Active Goal</span>
     </div>
 
+    <!-- Personal Profile Section -->
     <h2 id="about" class="section-title">Personal Profile</h2>
     <div class="grid-3">
       
@@ -54,7 +358,7 @@
           <h3>Overview</h3>
         </div>
         <ul>
-          <li><strong>Age:</strong> 20 Years Old</li>
+          <li><strong>Age:</strong> 21 Years Old</li>
           <li><strong>Birthday:</strong> September 24</li>
           <li><strong>Location:</strong> Galle, Sri Lanka</li>
           <li><strong>Hometown:</strong> Ampara</li>
@@ -89,6 +393,7 @@
 
     </div>
 
+    <!-- Tech & Gaming Section -->
     <h2 id="interests" class="section-title">Tech & Gaming Hub</h2>
     <div class="grid-2">
 
