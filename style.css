@@ -1,17 +1,296 @@
+/* ==========================================================================
+   Thimira - Personal Portfolio & Profile Stylesheet (style.css)
+   Theme: Vibrant Dark Glassmorphism
+   ========================================================================== */
+
+:root {
+  --bg-gradient: linear-gradient(135deg, #0b0f19 0%, #111827 50%, #1e1035 100%);
+  --accent-pink: #ec4899;
+  --accent-purple: #8b5cf6;
+  --accent-cyan: #06b6d4;
+  --accent-green: #10b981;
+  --glass-bg: rgba(255, 255, 255, 0.04);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --glass-hover-border: rgba(255, 255, 255, 0.25);
+  --text-main: #f9fafb;
+  --text-muted: #9ca3af;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
 body {
-    background: #0b0b12;
-    color: white;
-    font-family: Arial, sans-serif;
-    text-align: center;
-    padding-top: 100px;
+  background: var(--bg-gradient);
+  color: var(--text-main);
+  min-height: 100vh;
+  overflow-x: hidden;
+  line-height: 1.6;
 }
 
-h1 {
-    font-size: 60px;
-    color: #8b6cff;
+/* Ambient Glowing Background Elements */
+.glow-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(120px);
+  z-index: -1;
+  opacity: 0.4;
 }
 
-p {
-    font-size: 20px;
-    color: #cccccc;
+.orb-1 {
+  width: 350px;
+  height: 350px;
+  background: var(--accent-pink);
+  top: -80px;
+  left: -80px;
+}
+
+.orb-2 {
+  width: 450px;
+  height: 450px;
+  background: var(--accent-purple);
+  top: 35%;
+  right: -120px;
+}
+
+.orb-3 {
+  width: 380px;
+  height: 380px;
+  background: var(--accent-cyan);
+  bottom: -80px;
+  left: 15%;
+}
+
+/* Navigation Bar */
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.8rem 8%;
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--glass-border);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.logo {
+  font-size: 1.6rem;
+  font-weight: 800;
+  letter-spacing: 1px;
+  background: linear-gradient(to right, var(--accent-pink), var(--accent-cyan));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.nav-links {
+  display: flex;
+  gap: 2rem;
+  list-style: none;
+}
+
+.nav-links a {
+  color: var(--text-main);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+  color: var(--accent-cyan);
+}
+
+/* Hero Section */
+.hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 5rem 1.5rem 3rem;
+}
+
+.badge {
+  background: rgba(139, 92, 246, 0.15);
+  border: 1px solid rgba(139, 92, 246, 0.4);
+  color: #c084fc;
+  padding: 0.4rem 1.2rem;
+  border-radius: 50px;
+  font-size: 0.9rem;
+  margin-bottom: 1.5rem;
+  font-weight: 600;
+  display: inline-block;
+}
+
+.badge-active {
+  margin: 0;
+  background: rgba(16, 185, 129, 0.2);
+  border-color: var(--accent-green);
+  color: var(--accent-green);
+}
+
+.hero h1 {
+  font-size: clamp(2.5rem, 5.5vw, 4.2rem);
+  font-weight: 900;
+  line-height: 1.15;
+  max-width: 850px;
+  margin-bottom: 1.2rem;
+}
+
+.gradient-text {
+  background: linear-gradient(135deg, var(--accent-pink), var(--accent-purple), var(--accent-cyan));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.hero p {
+  font-size: 1.2rem;
+  color: var(--text-muted);
+  max-width: 650px;
+  margin-bottom: 2rem;
+}
+
+.hero-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  justify-content: center;
+  margin-bottom: 2.5rem;
+}
+
+.tag {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  padding: 0.5rem 1rem;
+  border-radius: 12px;
+  font-size: 0.9rem;
+  color: var(--text-main);
+}
+
+/* Layout Containers & Section Titles */
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.section-title {
+  font-size: 1.8rem;
+  margin-bottom: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.section-title::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--glass-border);
+}
+
+/* Grids */
+.grid-3 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.8rem;
+  margin-bottom: 4rem;
+}
+
+.grid-2 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 1.8rem;
+  margin-bottom: 4rem;
+}
+
+/* Glassmorphism Cards */
+.card {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 20px;
+  padding: 2rem;
+  backdrop-filter: blur(12px);
+  transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  border-color: var(--glass-hover-border);
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.2rem;
+}
+
+.card-icon {
+  width: 45px;
+  height: 45px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+}
+
+.icon-pink { background: rgba(236, 72, 153, 0.2); color: var(--accent-pink); }
+.icon-purple { background: rgba(139, 92, 246, 0.2); color: var(--accent-purple); }
+.icon-cyan { background: rgba(6, 182, 212, 0.2); color: var(--accent-cyan); }
+.icon-green { background: rgba(16, 185, 129, 0.2); color: var(--accent-green); }
+
+.card h3 {
+  font-size: 1.3rem;
+}
+
+.card ul {
+  list-style: none;
+}
+
+.card li {
+  margin-bottom: 0.8rem;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.card li strong {
+  color: var(--text-main);
+}
+
+/* Active Status Banner */
+.status-banner {
+  background: linear-gradient(90deg, rgba(139, 92, 246, 0.15), rgba(6, 182, 212, 0.15));
+  border: 1px solid rgba(139, 92, 246, 0.3);
+  border-radius: 16px;
+  padding: 1.5rem 2rem;
+  margin-bottom: 4rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.status-title {
+  color: var(--accent-cyan);
+  margin-bottom: 0.2rem;
+}
+
+.status-desc {
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: 2.5rem 1rem;
+  color: var(--text-muted);
+  border-top: 1px solid var(--glass-border);
 }
